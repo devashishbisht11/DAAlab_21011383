@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int search(int arr[], int n, int key) {
+  int i;
+  for (i = 0; i < n; i++) {
+    if (arr[i] == key) {
+      return i;
+    }
+  }
+  return -1;
+  }
+  
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};  // Array of non-negative integers
+  int n = sizeof(arr) / sizeof(arr[0]);  // Number of elements in the array
+  int key;  // Key element to search for
+  
+  printf("Enter the key element to search for: ");
+  scanf("%d", &key);
+  
+  int result = search(arr, n, key);
+  
+  if (result == -1) {
+    printf("Key element not found\n");
+  } 
+  else {
+    printf("Key element found at index %d\n", result);
+  }
+  
+  return 0;
+}
