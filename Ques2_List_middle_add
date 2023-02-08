@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+// Structure to represent a node in the linked list
+struct node {
+  int data;
+  struct node *next;
+};
+
+// Function to create a new node
+struct node *newNode(int data) {
+  struct node *temp = (struct node *)malloc(sizeof(struct node));
+  temp->data = data;
+  temp->next = NULL;
+  return temp;
+}
+
+// Function to find the middle node in a linked list
+struct node *middleNode(struct node *head) {
+  struct node *slow = head;
+  struct node *fast = head;
+
+  while (fast != NULL && fast->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+
+  return slow;
+}
+
+// Function to add a new node at the beginning of the linked list
+void addAtBegining(struct node **head_ref, int data) {
+  struct node *temp = newNode(data);
+  temp->next = *head_ref;
+  *head_ref = temp;
+}
+
+// Function to print the linked list
+void printList(struct node *head) {
+  while (head != NULL) {
+    printf("%d ", head->data);
+    head = head->next;
+  }
+  printf("\n");
+}
+
+int main() {
+  // Create the linked list 1->2->3->4->5
+  struct node *head = newNode(1);
+  head->next = newNode(2);
+  head->next->next = newNode(3);
+  head->next->next->next = newNode(4);
+  head->next->next->next->next = newNode(5);
+
+  // Find the middle node and print the linked list
+  struct node *middle = middleNode(head);
+  printf("The middle node is: %d\n", middle->data);
+  printf("The linked list is: ");
+  printList(head);
+
+  // Add a new node at the beginning of the linked list
+  addAtBegining(&head, 0);
+  printf("The linked list after adding a node at the beginning: ");
+  printList(head);
+
+  return 0;
+}
